@@ -205,7 +205,7 @@ class electronic_invoice_fields(models.Model):
                             str(document.puntoFacturacionFiscal).rjust(3, '0'))
 
                         record.lastFiscalNumber = fiscalN
-                        record.puntoFactFiscal = self.puntoFacturacion
+                        #record.puntoFactFiscal = self.puntoFacturacion
 
                         document.numeroDocumentoFiscal = str(
                             int(document.numeroDocumentoFiscal)+1)
@@ -328,9 +328,10 @@ class electronic_invoice_fields(models.Model):
             codigoSucursal = config_document_obj.codigoSucursalEmisor
             url_wsdl = config_document_obj.wsdl
             self.puntoFacturacion = config_document_obj.puntoFacturacionFiscal
+            varhsfeURLstr = config_document_obj.hsfeURL
             self.hsfeURLstr = config_document_obj.hsfeURL
 
-        url = self.hsfeURLstr + "api/send"
+        url = varhsfeURLstr + "api/send"
 
         precioDescuento = '0'
         for item in self.invoice_line_ids:
