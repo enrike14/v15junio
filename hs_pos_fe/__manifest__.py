@@ -22,11 +22,11 @@
         "views/invoice_pos_conf.xml"
     ],
     # only loaded in demonstration mode
-    """     "qweb": [
+    "qweb": [
         "static/src/xml/OrderReceipt.xml",
         "static/src/xml/FiscalButton.xml",
 
-    ], """
+    ],
     'assets': {
         'point_of_sale.assets': [
             '/hs_pos_fe/static/src/css/custom_order.css',
