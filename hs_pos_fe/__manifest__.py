@@ -28,10 +28,6 @@
 
     ], """
     'assets': {
-        'web.assets_qweb': [
-            "hs_pos_fe/static/src/xml/OrderReceipt.xml",
-            "hs_pos_fe/static/src/xml/FiscalButton.xml",
-        ],
         'point_of_sale.assets': [
             'hs_pos_fe/static/src/css/custom_order.css',
             'hs_pos_fe/static/src/js/FiscalButton.js',
