@@ -29,11 +29,11 @@
     ], """
     'assets': {
         'point_of_sale.assets': [
-            'hs_pos_fe/static/src/css/custom_order.css',
-            'hs_pos_fe/static/src/js/FiscalButton.js',
-            'hs_pos_fe/static/src/js/models.js',
-            'hs_pos_fe/static/src/js/order_receipt.js',
-            'hs_pos_fe/static/src/js/payment.js',
+            '/hs_pos_fe/static/src/css/custom_order.css',
+            '/hs_pos_fe/static/src/js/FiscalButton.js',
+            '/hs_pos_fe/static/src/js/models.js',
+            '/hs_pos_fe/static/src/js/order_receipt.js',
+            '/hs_pos_fe/static/src/js/payment.js',
         ],
 
     },
