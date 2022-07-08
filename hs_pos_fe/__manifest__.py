@@ -18,7 +18,7 @@
     "depends": ["hs_electronic_invoice", "point_of_sale"],
     # always loaded
     "data": [
-        "views/assets.xml",
+        # "views/assets.xml",
         "views/invoice_pos_conf.xml"
     ],
     # only loaded in demonstration mode
@@ -27,4 +27,14 @@
         "static/src/xml/FiscalButton.xml",
 
     ],
+    'assets': {
+        'point_of_sale.assets': [
+            '/hs_pos_fe/static/src/css/custom_order.css',
+            '/hs_pos_fe/static/src/js/FiscalButton.js',
+            '/hs_pos_fe/static/src/js/models.js',
+            '/hs_pos_fe/static/src/js/order_receipt.js',
+            '/hs_pos_fe/static/src/js/payment.js',
+        ],
+
+    },
 }
