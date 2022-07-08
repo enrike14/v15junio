@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+
+
+    <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+
+        <xpath expr="//div[hasclass('pos-receipt')]/t[1]" position="before">
+
+            <t t-set="fe" t-value="fe_receipt_render()" />
+            <t t-if='fe.is_pos == "True"'>
+                <br />
+                <br />
+                <div class="pos-receipt-custom-text">
+                Comprobante Auxiliar de Factura Electrónica            
+                </div>
+                <br />
+                <br />
+            </t>
+        </xpath>
+
+        <xpath expr="//div[hasclass('pos-receipt-order-data')]" position="inside">
+            <t t-set="fe" t-value="fe_receipt_render()" />
+            <t t-if='fe.is_pos == "True"'>
+                <br />
+                <div>Consulte en https://fe.dgi.mef.gob.pa/consulta usando el CUFE:</div>
+                <br />
+
+                <div>
+                    <t t-esc='fe.cufe' />
+                </div>
+
+                <br />
+                <div>o escaneando el código QR</div>
+                <br />
+                <div>
+                    <t t-if='receipt.company.logo'>
+                        <img class="pos-receipt-logo" t-att-src='fe.qr_img' />
+                        <br />
+                    </t>
+                </div>
+            </t>
+        </xpath>
+
+
+    </t>
+
+</templates>
