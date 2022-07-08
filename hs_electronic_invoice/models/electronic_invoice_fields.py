@@ -413,7 +413,7 @@ class electronic_invoice_fields(models.Model):
                     if respuesta['mensaje'] == "Proceso de Anulación ejecutado con éxito.":
                         original_invoice_id.state = "cancel"
                     self.pagadoCompleto = "FECompletada"
-                    # self.action_download_fe_pdf(self.lastFiscalNumber)
+                    # self.action_download_fe_pdf(self.lastFiscalNumber)..
                 else:
                     self.insert_data_to_logs(respuesta, self.name)
                     body = "Factura Electrónica No Generada:<br> <b style='color:red;'>Error " + \
