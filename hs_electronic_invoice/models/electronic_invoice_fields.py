@@ -177,6 +177,8 @@ class electronic_invoice_fields(models.Model):
     api_token = fields.Char(string="ApiToken", store="True", default='')
     puntoFacturacion = fields.Char(
         string="Punto Fac", store="True", default='')
+    cafe = fields.Char(string='CAFE', readonly="True", store="True")
+    qr_pos = fields.Char(string='QR POS', readonly="True", store="True")
 
     @api.depends('qr_code')
     def on_change_pago(self):
@@ -678,6 +680,54 @@ class electronic_invoice_fields(models.Model):
         response = requests.request(
             "POST", url, headers=headers, data=json.dumps(dataJsonItem))
         return json.loads(response.text)
+
+    def get_pdf_fe_pos(self):
+        pdf_doc = ""
+        self.pagadoCompleto = "Finalizado"
+        # constultamos el objeto de nuestra configuración del servicio
+        config_document_obj = self.env["electronic.invoice"].search(
+            [('name', '=', 'ebi-pac')], limit=1)
+        if config_document_obj:
+            tokenEmpresa = config_document_obj.tokenEmpresa
+            tokenPassword = config_document_obj.tokenPassword
+            codigoSucursal = config_document_obj.codigoSucursalEmisor
+            url_wsdl = config_document_obj.wsdl
+            hs_url = config_document_obj.hsfeURL
+            self.puntoFacturacion = config_document_obj.puntoFacturacionFiscal
+        url = hs_url + "api/pdf"
+
+        pdf_values = json.dumps({
+            "wsdl_url": url_wsdl,
+            "codigoSucursalEmisor": codigoSucursal,
+            "tokenEmpresa": tokenEmpresa,
+            "tokenPassword": tokenPassword,
+            "tipoEmision": self.tipoEmisionPdf,
+            "tipoDocumento": self.tipoDocPdf,
+            "numeroDocumentoFiscal": self.pdfNumber,
+            "puntoFacturacionFiscal": self.puntoFacturacion,
+
+        })
+
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + str(self.api_token)
+        }
+
+        logging.info('Enviado PDF:: ' + str(pdf_values))
+
+        correcto = False
+        #logging.info("PD 64" + str(response))
+        while correcto != True:
+            response = requests.request(
+                "POST", url, headers=headers, data=pdf_values)
+            respuesta = json.loads(response.text)
+            logging.info('Resultado PDF:: ' + str(response.text))
+            if respuesta["codigo"] == "200":
+                correcto = True
+                pdf_doc = str(respuesta["documento"])
+                self.download_pdf(self.pdfNumber, str(respuesta["documento"]))
+
+        return pdf_doc
 
     def get_pdf_fe(self):
         self.pagadoCompleto = "Finalizado"
