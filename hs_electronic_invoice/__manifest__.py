@@ -13,7 +13,7 @@
     # for the full list
     "category": "Uncategorized",
     "version": "0.1",
-    "licence": "OPL-1",
+    "licence": "HCPL-1",
     # any module necessary for this one to work correctly
     "depends": ["base", "account_accountant"],
     # always loaded
@@ -33,8 +33,8 @@
         "views/views_fe_sector.xml",
         "views/views_fe_measures.xml",
         "views/views_country_field.xml",
-        
-        
+
+
     ],
     # only loaded in demonstration mode
     "demo": [

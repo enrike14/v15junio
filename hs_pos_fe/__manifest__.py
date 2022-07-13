@@ -13,7 +13,7 @@
     # for the full list
     "category": "Uncategorized",
     "version": "0.1",
-    "licence": "OPL-1",
+    "licence": "HCPL-1",
     # any module necessary for this one to work correctly
     "depends": ["hs_electronic_invoice", "point_of_sale"],
     # always loaded

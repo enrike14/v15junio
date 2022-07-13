@@ -393,6 +393,8 @@ class electronic_invoice_fields(models.Model):
                     tipo_doc_text = respuesta['mensaje']
 
                     if 'qr' in respuesta and 'cufe' in respuesta:
+                        self.qr_pos = str(respuesta['qr'])
+                        self.cafe = str(respuesta['cufe'])
                         tipo_doc_text = "Factura Electrónica Creada" + \
                             " :<br> <b>CUFE:</b> (<a target='_blank' href='" + \
                             respuesta['qr']+"'>" + \
